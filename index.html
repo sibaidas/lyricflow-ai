@@ -1,130 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LyricFlow AI</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="style.css">
+<title>LyricFlow AI</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 </head>
+
 <body>
 
-<!-- HOME -->
+<!-- HOME SCREEN -->
 <section id="homeScreen" class="screen active">
 
-  <h1>🎵 LyricFlow AI</h1>
-  <p>Create AI powered lyrical videos.</p>
+    <h1>🎵 LyricFlow AI</h1>
 
-  <button id="newProjectBtn" class="primary">
-    New Project
-  </button>
+    <p>Create AI powered lyrical videos.</p>
+
+    <button id="newProjectBtn" class="primary">
+        ➕ New Project
+    </button>
 
 </section>
 
-<!-- UPLOAD -->
+
+<!-- UPLOAD SCREEN -->
 <section id="uploadScreen" class="screen">
 
-  <h2>New Project</h2>
+    <h2>New Project</h2>
 
-  <label class="uploadBox">
+    <label class="uploadBox">
 
-    <input
-      id="videoInput"
-      type="file"
-      accept="video/*"
-      hidden>
+        <input 
+        id="videoInput"
+        type="file"
+        accept="video/*"
+        hidden>
 
-      📹 Upload Video
+        📹 Upload Video
 
-  </label>
+    </label>
 
-  <button id="backHomeBtn" class="secondary">
-    Back
-  </button>
+
+    <button id="backHomeBtn" class="secondary">
+        ← Back
+    </button>
 
 </section>
 
-<!-- PREVIEW -->
+
+<!-- PREVIEW SCREEN -->
 <section id="previewScreen" class="screen">
 
-  <video
+    <h2>Preview</h2>
+
+    <video 
     id="videoPreview"
     controls>
-  </video>
+    </video>
 
-  <div id="videoInfo"></div>
 
-  <button
-      id="continueBtn"
-      class="primary">
-      Continue
-  </button>
+    <div id="videoInfo">
+        No video selected
+    </div>
+
+
+    <button 
+    id="continueBtn"
+    class="primary">
+
+        Continue →
+
+    </button>
+
 
 </section>
 
-<!-- EDITOR -->
+
+<!-- EDITOR SCREEN -->
 <section id="editorScreen" class="screen">
+
 
 <header class="editorHeader">
 
-<button id="editorBack">
-←
-</button>
+    <button id="editorBack">
+        ←
+    </button>
 
-<h3>Editor</h3>
 
-<button>
-💾
-</button>
+    <h3>Editor</h3>
+
+
+    <button>
+        💾
+    </button>
 
 </header>
 
+
+
 <div class="previewArea">
 
-<video
-id="editorVideo"
-controls>
-</video>
+    <video 
+    id="editorVideo"
+    controls>
+    </video>
 
-<div id="captionOverlay">
 
-Your captions will appear here
+    <div id="captionOverlay">
+
+        Your captions will appear here
+
+    </div>
 
 </div>
 
-</div>
+
 
 <div class="timeline">
 
-<div class="progress"></div>
+    <div class="progress"></div>
 
 </div>
 
-<textarea
+
+
+<textarea 
 id="captionText"
-placeholder="Write captions here..."></textarea>
+placeholder="Write captions here...">
+</textarea>
+
+
 
 <div class="toolbar">
 
-<button>Aa</button>
+<button>
+Aa
+</button>
 
-<button>🌈</button>
+<button>
+🌈
+</button>
 
-<button>✨</button>
+<button>
+✨
+</button>
 
-<button>📍</button>
+<button>
+📍
+</button>
 
-<button>🤖</button>
+<button>
+🤖
+</button>
 
-<button>📤</button>
+<button>
+📤
+</button>
 
 </div>
 
+
 </section>
 
+
+<script src="js/editor.js"></script>
 <script src="app.js"></script>
+
 
 </body>
 </html>
