@@ -1,5 +1,5 @@
 // LyricFlow AI Main Controller
-// Engine Communication Version
+// Caption Generator Connected Version
 
 
 const homeScreen = document.getElementById("homeScreen");
@@ -13,9 +13,10 @@ const backHomeBtn = document.getElementById("backHomeBtn");
 const continueBtn = document.getElementById("continueBtn");
 const editorBack = document.getElementById("editorBack");
 
+const generateCaptionBtn = document.getElementById("generateCaptionBtn");
+
 
 const videoInput = document.getElementById("videoInput");
-
 
 const videoPreview = document.getElementById("videoPreview");
 const editorVideo = document.getElementById("editorVideo");
@@ -33,6 +34,8 @@ let project = {
 
     video:null,
 
+    file:null,
+
     name:"",
 
     size:""
@@ -42,31 +45,29 @@ let project = {
 
 
 
+
 // HOME → UPLOAD
 
 newProjectBtn.onclick = ()=>{
-
 
     homeScreen.classList.remove("active");
 
     uploadScreen.classList.add("active");
 
-
 };
 
 
 
 
-// UPLOAD → HOME
+
+// BACK HOME
 
 backHomeBtn.onclick = ()=>{
-
 
     uploadScreen.classList.remove("active");
 
     homeScreen.classList.add("active");
 
-
 };
 
 
@@ -74,8 +75,7 @@ backHomeBtn.onclick = ()=>{
 
 
 
-// MEDIA SELECT
-
+// MEDIA UPLOAD
 
 videoInput.onchange = ()=>{
 
@@ -87,24 +87,34 @@ videoInput.onchange = ()=>{
 
 
 
-    project.video = URL.createObjectURL(file);
+    project.file = file;
+
+
+    project.video =
+    URL.createObjectURL(file);
+
+
 
     project.name = file.name;
+
 
     project.size =
     (file.size / 1024 / 1024).toFixed(2)+" MB";
 
 
 
-    videoPreview.src = project.video;
+    videoPreview.src =
+    project.video;
 
 
 
     videoInfo.innerHTML = `
 
     <b>${project.name}</b>
+
     <br>
-    ${project.size}
+
+    Size: ${project.size}
 
     `;
 
@@ -123,13 +133,14 @@ videoInput.onchange = ()=>{
 
 
 
-// OPEN EDITOR
 
+// OPEN EDITOR
 
 continueBtn.onclick = ()=>{
 
 
-    editorVideo.src = project.video;
+    editorVideo.src =
+    project.video;
 
 
     previewScreen.classList.remove("active");
@@ -138,11 +149,13 @@ continueBtn.onclick = ()=>{
 
 
 
-    // Apply default style
+    if(typeof StyleEngine !== "undefined"){
 
-    StyleEngine.apply(
-        captionOverlay
-    );
+        StyleEngine.apply(
+            captionOverlay
+        );
+
+    }
 
 
 };
@@ -153,8 +166,8 @@ continueBtn.onclick = ()=>{
 
 
 
-// BACK
 
+// BACK FROM EDITOR
 
 editorBack.onclick = ()=>{
 
@@ -173,14 +186,13 @@ editorBack.onclick = ()=>{
 
 
 
-
-// CAPTION SYSTEM
-
+// MANUAL CAPTION INPUT
 
 captionText.oninput = ()=>{
 
 
-    const text = captionText.value;
+    const text =
+    captionText.value;
 
 
 
@@ -189,24 +201,26 @@ captionText.oninput = ()=>{
 
 
 
-    // Save caption
-
     if(typeof CaptionEngine !== "undefined"){
 
 
+        CaptionEngine.clear();
+
+
         CaptionEngine.addCaption(
+
             0,
+
             10,
+
             text
+
         );
 
 
     }
 
 
-
-
-    // Apply style
 
 
     if(typeof StyleEngine !== "undefined"){
@@ -220,8 +234,74 @@ captionText.oninput = ()=>{
     }
 
 
+};
+
+
+
+
+
+
+
+
+
+// AI CAPTION GENERATION BUTTON
+
+
+generateCaptionBtn.onclick = async ()=>{
+
+
+    if(!project.file){
+
+        alert(
+            "Please upload a video first"
+        );
+
+        return;
+
+    }
+
+
+
+    generateCaptionBtn.innerText =
+    "⏳";
+
+
+
+    const captions =
+    await CaptionGenerator.generate(
+        project.file
+    );
+
+
+
+    if(captions.length){
+
+
+        captionText.value =
+        captions[0].text;
+
+
+
+        captionOverlay.innerText =
+        captions[0].text;
+
+
+
+        alert(
+            "AI captions generated!"
+        );
+
+
+    }
+
+
+
+    generateCaptionBtn.innerText =
+    "🤖";
+
 
 };
+
 
 
 
@@ -239,15 +319,15 @@ editorVideo.ontimeupdate = ()=>{
     if(editorVideo.duration){
 
 
-        const percentage =
+        const percent =
 
         (editorVideo.currentTime /
-        editorVideo.duration) * 100;
+        editorVideo.duration)*100;
 
 
 
         progress.style.width =
-        percentage+"%";
+        percent+"%";
 
 
     }
@@ -260,5 +340,5 @@ editorVideo.ontimeupdate = ()=>{
 
 
 console.log(
-"LyricFlow AI Engine Connected"
+"LyricFlow AI Caption System Connected"
 );
