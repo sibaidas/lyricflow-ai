@@ -24,9 +24,7 @@
 
 <h1>LyricFlow AI</h1>
 
-<p>
-Create AI powered lyrical videos.
-</p>
+<p>Create AI powered lyrical videos.</p>
 
 <button id="newProjectBtn" class="primary">
 ➕ New Project
@@ -48,8 +46,7 @@ Create AI powered lyrical videos.
 
 </div>
 
-
-<!-- NEW PROJECT -->
+<!-- PROJECT SCREEN -->
 
 <div id="projectScreen" class="screen">
 
@@ -57,7 +54,7 @@ Create AI powered lyrical videos.
 
 <h2>New Project</h2>
 
-<p>Select what you want to upload.</p>
+<p>Select your media.</p>
 
 <label class="upload">
 
@@ -95,7 +92,18 @@ class="secondary">
 
 </div>
 
-<script src="app.js"></script>
+<!-- PREVIEW SCREEN -->
 
-</body>
-</html>
+<div id="previewScreen" class="screen">
+
+<div class="card">
+
+<h2>Video Preview</h2>
+
+<video
+id="videoPreview"
+controls
+style="
+width:100%;
+border-radius:18px;
+margin-bottom:20px;
