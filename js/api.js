@@ -1,5 +1,5 @@
 // LyricFlow AI API Manager
-// AI service connection layer
+// Groq Whisper Connection Foundation
 
 
 const APIManager = {
@@ -7,9 +7,7 @@ const APIManager = {
 
     provider: "groq",
 
-
     isConnected: false,
-
 
 
     async transcribe(file, language = "auto"){
@@ -26,41 +24,136 @@ const APIManager = {
 
 
         console.log(
-            "Preparing transcription:",
+            "Sending file for transcription:",
             file.name
+        );
+
+
+
+        const formData = new FormData();
+
+
+        formData.append(
+            "file",
+            file
+        );
+
+
+        formData.append(
+            "language",
+            language
         );
 
 
 
         /*
         
-        Future secure flow:
+        IMPORTANT:
+
+        This URL will later point to our secure backend.
+
+        Example:
 
         Browser
-           |
-           ↓
-        Our backend API
-           |
-           ↓
-        Groq Whisper
-           |
-           ↓
-        Transcript + timestamps
+            ↓
+        LyricFlow Server
+            ↓
+        Groq Whisper API
+            ↓
+        Transcript
 
 
         */
 
 
-        return {
 
-            success:false,
+        try{
 
-            message:
-            "API connection pending secure setup",
 
-            segments:[]
+            const response = await fetch(
 
-        };
+                "YOUR_BACKEND_URL/transcribe",
+
+                {
+
+                    method:"POST",
+
+                    body:formData
+
+                }
+
+            );
+
+
+
+
+            if(!response.ok){
+
+
+                throw new Error(
+                    "Transcription failed"
+                );
+
+
+            }
+
+
+
+
+            const data =
+            await response.json();
+
+
+
+            this.isConnected = true;
+
+
+
+            return {
+
+
+                success:true,
+
+
+                segments:
+                data.segments || []
+
+
+            };
+
+
+
+        }
+
+
+
+        catch(error){
+
+
+            console.error(
+                "API Error:",
+                error
+            );
+
+
+
+            return {
+
+
+                success:false,
+
+
+                message:error.message,
+
+
+                segments:[]
+
+
+            };
+
+
+        }
+
 
 
     },
@@ -70,6 +163,7 @@ const APIManager = {
 
 
     setProvider(name){
+
 
         this.provider = name;
 
@@ -85,9 +179,12 @@ const APIManager = {
 
         return {
 
+
             provider:this.provider,
 
+
             connected:this.isConnected
+
 
         };
 
@@ -101,5 +198,5 @@ const APIManager = {
 
 
 console.log(
-"API Manager Loaded"
+"Groq API Manager Ready"
 );
