@@ -1,5 +1,5 @@
 // LyricFlow AI Caption Generator
-// AI Caption Processing Foundation
+// Connected with API Manager
 
 
 const CaptionGenerator = {
@@ -8,12 +8,26 @@ const CaptionGenerator = {
     isProcessing: false,
 
 
-    async generate(mediaFile){
+    async generate(mediaFile, language = "auto"){
 
 
         if(!mediaFile){
 
-            console.log("No media selected");
+            console.log(
+                "No media selected"
+            );
+
+            return [];
+
+        }
+
+
+
+        if(this.isProcessing){
+
+            console.log(
+                "Already generating captions..."
+            );
 
             return [];
 
@@ -25,100 +39,173 @@ const CaptionGenerator = {
 
 
 
-        console.log(
-            "Generating captions for:",
-            mediaFile.name
-        );
+        try{
+
+
+            console.log(
+                "Starting AI caption generation..."
+            );
 
 
 
-        /*
-        
-        AI API connection will be added here.
-
-        Flow:
-
-        1. Send audio/video to backend
-        2. Backend sends to Groq Whisper
-        3. Receive transcript
-        4. Convert into caption format
-
-        */
-
-
-        const demoCaptions = [
-
-
-            {
-                start:0,
-                end:4,
-                text:"Welcome to LyricFlow AI"
-            },
-
-
-            {
-                start:4,
-                end:8,
-                text:"Your lyrics will appear here"
-            },
-
-
-            {
-                start:8,
-                end:12,
-                text:"AI powered lyrical video editing"
-            }
-
-
-        ];
+            let result;
 
 
 
-        if(typeof CaptionEngine !== "undefined"){
+            // Send file to API Manager
+
+            if(typeof APIManager !== "undefined"){
 
 
-            CaptionEngine.clear();
+                result = await APIManager.transcribe(
 
+                    mediaFile,
 
-
-            demoCaptions.forEach(caption=>{
-
-
-                CaptionEngine.addCaption(
-
-                    caption.start,
-
-                    caption.end,
-
-                    caption.text
+                    language
 
                 );
 
 
-            });
+            }
+            else{
+
+
+                throw new Error(
+                    "API Manager not loaded"
+                );
+
+
+            }
+
+
+
+
+
+
+            if(!result.success){
+
+
+                console.log(
+                    result.message
+                );
+
+
+                return [];
+
+            }
+
+
+
+
+
+
+
+            const captions = result.segments.map(
+                
+                segment => ({
+
+
+                    start: segment.start,
+
+
+                    end: segment.end,
+
+
+                    text: segment.text.trim()
+
+
+
+                })
+
+            );
+
+
+
+
+
+
+
+            // Send captions to Caption Engine
+
+            if(typeof CaptionEngine !== "undefined"){
+
+
+
+                CaptionEngine.clear();
+
+
+
+
+                captions.forEach(caption => {
+
+
+
+                    CaptionEngine.addCaption(
+
+
+                        caption.start,
+
+
+                        caption.end,
+
+
+                        caption.text
+
+
+                    );
+
+
+                });
+
+
+
+            }
+
+
+
+
+
+
+            console.log(
+                "Captions generated:",
+                captions
+            );
+
+
+
+            return captions;
+
 
 
         }
 
 
 
-        this.isProcessing = false;
+        catch(error){
+
+
+            console.error(
+                "Caption generation failed:",
+                error
+            );
+
+
+            return [];
+
+        }
 
 
 
-        console.log(
-            "Caption generation complete"
-        );
+        finally{
 
 
+            this.isProcessing = false;
 
-        return demoCaptions;
 
+        }
 
 
     }
-
-
 
 
 
@@ -127,5 +214,5 @@ const CaptionGenerator = {
 
 
 console.log(
-    "Caption Generator Loaded"
+"Caption Generator Connected To API"
 );
