@@ -1,176 +1,309 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>LyricFlow AI</title>
 
+
 <link rel="stylesheet" href="style.css">
+
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+
 </head>
+
 
 <body>
 
-<!-- HOME SCREEN -->
+
+
+<!-- HOME -->
+
 <section id="homeScreen" class="screen active">
 
-    <h1>🎵 LyricFlow AI</h1>
 
-    <p>Create AI powered lyrical videos.</p>
+<h1>🎵 LyricFlow AI</h1>
 
-    <button id="newProjectBtn" class="primary">
-        ➕ New Project
-    </button>
+<p>Create AI powered lyrical videos.</p>
+
+
+<button id="newProjectBtn" class="primary">
+
+➕ New Project
+
+</button>
+
 
 </section>
 
 
-<!-- UPLOAD SCREEN -->
+
+
+
+
+<!-- UPLOAD -->
+
 <section id="uploadScreen" class="screen">
 
-    <h2>New Project</h2>
 
-    <label class="uploadBox">
-
-        <input 
-        id="videoInput"
-        type="file"
-        accept="video/*"
-        hidden>
-
-        📹 Upload Video
-
-    </label>
+<h2>New Project</h2>
 
 
-    <button id="backHomeBtn" class="secondary">
-        ← Back
-    </button>
+
+<label class="uploadBox">
+
+
+<input
+
+id="videoInput"
+
+type="file"
+
+accept="video/*"
+
+hidden>
+
+
+📹 Upload Video
+
+
+</label>
+
+
+
+<button id="backHomeBtn" class="secondary">
+
+← Back
+
+</button>
+
 
 </section>
 
 
-<!-- PREVIEW SCREEN -->
+
+
+
+
+
+<!-- PREVIEW -->
+
 <section id="previewScreen" class="screen">
 
-    <h2>Preview</h2>
 
-    <video 
-    id="videoPreview"
-    controls>
-    </video>
+<h2>Preview</h2>
 
 
-    <div id="videoInfo">
-        No video selected
-    </div>
+
+<video
+
+id="videoPreview"
+
+controls>
+
+</video>
 
 
-    <button 
-    id="continueBtn"
-    class="primary">
 
-        Continue →
+<div id="videoInfo">
 
-    </button>
+No video selected
+
+</div>
+
+
+
+
+<button
+
+id="continueBtn"
+
+class="primary">
+
+Continue →
+
+</button>
 
 
 </section>
 
 
-<!-- EDITOR SCREEN -->
+
+
+
+
+
+
+
+<!-- EDITOR -->
+
 <section id="editorScreen" class="screen">
+
 
 
 <header class="editorHeader">
 
-    <button id="editorBack">
-        ←
-    </button>
+
+<button id="editorBack">
+
+←
+
+</button>
 
 
-    <h3>Editor</h3>
+
+<h3>Editor</h3>
 
 
-    <button>
-        💾
-    </button>
+
+<button>
+
+💾
+
+</button>
+
 
 </header>
 
 
 
+
+
+
+
 <div class="previewArea">
 
-    <video 
-    id="editorVideo"
-    controls>
-    </video>
+
+<video
+
+id="editorVideo"
+
+controls>
+
+</video>
 
 
-    <div id="captionOverlay">
 
-        Your captions will appear here
 
-    </div>
+<div id="captionOverlay">
+
+Your captions will appear here
 
 </div>
+
+
+</div>
+
+
+
+
+
 
 
 
 <div class="timeline">
 
-    <div class="progress"></div>
+
+<div class="progress">
+
+</div>
+
 
 </div>
 
 
 
-<textarea 
+
+
+
+
+<textarea
+
 id="captionText"
+
 placeholder="Write captions here...">
+
 </textarea>
+
+
+
+
 
 
 
 <div class="toolbar">
 
+
 <button>
+
 Aa
+
 </button>
 
+
 <button>
+
 🌈
+
 </button>
 
+
 <button>
+
 ✨
+
 </button>
 
+
 <button>
+
 📍
+
 </button>
 
+
 <button>
+
 🤖
+
 </button>
 
+
 <button>
+
 📤
+
 </button>
+
+
 
 </div>
+
+
 
 
 </section>
 
 
+
+
+
+
+
 <script src="js/editor.js"></script>
+
+<script src="js/captions.js"></script>
+
 <script src="app.js"></script>
 
 
+
 </body>
+
 </html>
