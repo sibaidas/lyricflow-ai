@@ -1,80 +1,92 @@
+// Screens
 const homeScreen = document.getElementById("homeScreen");
-const projectScreen = document.getElementById("projectScreen");
+const uploadScreen = document.getElementById("uploadScreen");
 const previewScreen = document.getElementById("previewScreen");
+const editorScreen = document.getElementById("editorScreen");
 
+// Buttons
 const newProjectBtn = document.getElementById("newProjectBtn");
-const backBtn = document.getElementById("backBtn");
-const backProjectBtn = document.getElementById("backProjectBtn");
+const backHomeBtn = document.getElementById("backHomeBtn");
 const continueBtn = document.getElementById("continueBtn");
+const editorBack = document.getElementById("editorBack");
 
+// Inputs
 const videoInput = document.getElementById("videoInput");
-const audioInput = document.getElementById("audioInput");
 
+// Preview
 const videoPreview = document.getElementById("videoPreview");
-const fileInfo = document.getElementById("fileInfo");
+const videoInfo = document.getElementById("videoInfo");
 
-// Open Project Screen
-newProjectBtn.addEventListener("click", () => {
+// Editor
+const editorVideo = document.getElementById("editorVideo");
+const captionText = document.getElementById("captionText");
+const captionOverlay = document.getElementById("captionOverlay");
+const progress = document.querySelector(".progress");
+
+let currentVideo = null;
+
+// Home → Upload
+newProjectBtn.onclick = () => {
     homeScreen.classList.remove("active");
-    projectScreen.classList.add("active");
-});
+    uploadScreen.classList.add("active");
+};
 
-// Back to Home
-backBtn.addEventListener("click", () => {
-    projectScreen.classList.remove("active");
+// Upload → Home
+backHomeBtn.onclick = () => {
+    uploadScreen.classList.remove("active");
     homeScreen.classList.add("active");
-});
+};
 
-// Back to Project Screen
-backProjectBtn.addEventListener("click", () => {
-    previewScreen.classList.remove("active");
-    projectScreen.classList.add("active");
-});
-
-// Video Selected
-videoInput.addEventListener("change", () => {
+// Select Video
+videoInput.onchange = () => {
 
     const file = videoInput.files[0];
 
     if(!file) return;
 
-    projectScreen.classList.remove("active");
-    previewScreen.classList.add("active");
+    currentVideo = URL.createObjectURL(file);
 
-    videoPreview.src = URL.createObjectURL(file);
-    videoPreview.style.display = "block";
+    videoPreview.src = currentVideo;
 
-    fileInfo.innerHTML = `
-        <p><strong>File:</strong> ${file.name}</p>
-        <p><strong>Size:</strong> ${(file.size/1024/1024).toFixed(2)} MB</p>
-        <p><strong>Type:</strong> ${file.type}</p>
+    videoInfo.innerHTML = `
+        <strong>${file.name}</strong><br>
+        ${(file.size/1024/1024).toFixed(2)} MB
     `;
 
-    continueBtn.style.display = "block";
-});
-
-// Audio Selected
-audioInput.addEventListener("change", () => {
-
-    const file = audioInput.files[0];
-
-    if(!file) return;
-
-    projectScreen.classList.remove("active");
+    uploadScreen.classList.remove("active");
     previewScreen.classList.add("active");
+};
 
-    videoPreview.style.display = "none";
+// Preview → Editor
+continueBtn.onclick = () => {
 
-    fileInfo.innerHTML = `
-        <p><strong>Audio:</strong> ${file.name}</p>
-        <p><strong>Size:</strong> ${(file.size/1024/1024).toFixed(2)} MB</p>
-        <p><strong>Type:</strong> ${file.type}</p>
-    `;
+    editorVideo.src = currentVideo;
 
-    continueBtn.style.display = "block";
+    previewScreen.classList.remove("active");
+    editorScreen.classList.add("active");
+};
+
+// Editor → Home
+editorBack.onclick = () => {
+
+    editorScreen.classList.remove("active");
+    homeScreen.classList.add("active");
+};
+
+// Live Caption Preview
+captionText.addEventListener("input", () => {
+    captionOverlay.innerText = captionText.value || "Your captions will appear here";
 });
 
-// Continue Button
-continueBtn.addEventListener("click", () => {
-    alert("🚧 Editor screen coming in Version 4!");
+// Timeline Progress
+editorVideo.addEventListener("timeupdate", () => {
+
+    if(editorVideo.duration){
+
+        const percent =
+        (editorVideo.currentTime/editorVideo.duration)*100;
+
+        progress.style.width = percent + "%";
+    }
+
 });
