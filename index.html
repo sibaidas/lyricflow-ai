@@ -23,8 +23,6 @@
 
 
 
-<!-- HOME -->
-
 <section id="homeScreen" class="screen active">
 
 
@@ -46,14 +44,10 @@
 
 
 
-
-<!-- UPLOAD -->
-
 <section id="uploadScreen" class="screen">
 
 
 <h2>New Project</h2>
-
 
 
 <label class="uploadBox">
@@ -65,12 +59,12 @@ id="videoInput"
 
 type="file"
 
-accept="video/*"
+accept="video/*,audio/*"
 
 hidden>
 
 
-📹 Upload Video
+📹 Upload Media
 
 
 </label>
@@ -92,8 +86,6 @@ hidden>
 
 
 
-<!-- PREVIEW -->
-
 <section id="previewScreen" class="screen">
 
 
@@ -113,10 +105,9 @@ controls>
 
 <div id="videoInfo">
 
-No video selected
+No media selected
 
 </div>
-
 
 
 
@@ -139,9 +130,6 @@ Continue →
 
 
 
-
-
-<!-- EDITOR -->
 
 <section id="editorScreen" class="screen">
 
@@ -206,7 +194,6 @@ Your captions will appear here
 
 
 
-
 <div class="timeline">
 
 
@@ -230,6 +217,7 @@ id="captionText"
 placeholder="Write captions here...">
 
 </textarea>
+
 
 
 
@@ -287,7 +275,6 @@ Aa
 
 
 
-
 </section>
 
 
@@ -296,9 +283,18 @@ Aa
 
 
 
+<!-- Engines -->
+
 <script src="js/editor.js"></script>
 
 <script src="js/captions.js"></script>
+
+<script src="js/styleEngine.js"></script>
+
+<script src="js/language.js"></script>
+
+
+<!-- Main Controller -->
 
 <script src="app.js"></script>
 
