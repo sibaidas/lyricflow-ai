@@ -1,109 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LyricFlow AI</title>
 
-<title>LyricFlow AI</title>
+  <link rel="stylesheet" href="style.css">
 
-<link rel="stylesheet" href="style.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-<!-- HOME SCREEN -->
+<!-- HOME -->
+<section id="homeScreen" class="screen active">
 
-<div id="homeScreen" class="screen active">
+  <h1>🎵 LyricFlow AI</h1>
+  <p>Create AI powered lyrical videos.</p>
 
-<div class="card">
+  <button id="newProjectBtn" class="primary">
+    New Project
+  </button>
 
-<div class="logo">🎵</div>
+</section>
 
-<h1>LyricFlow AI</h1>
+<!-- UPLOAD -->
+<section id="uploadScreen" class="screen">
 
-<p>Create AI powered lyrical videos.</p>
+  <h2>New Project</h2>
 
-<button id="newProjectBtn" class="primary">
-➕ New Project
+  <label class="uploadBox">
+
+    <input
+      id="videoInput"
+      type="file"
+      accept="video/*"
+      hidden>
+
+      📹 Upload Video
+
+  </label>
+
+  <button id="backHomeBtn" class="secondary">
+    Back
+  </button>
+
+</section>
+
+<!-- PREVIEW -->
+<section id="previewScreen" class="screen">
+
+  <video
+    id="videoPreview"
+    controls>
+  </video>
+
+  <div id="videoInfo"></div>
+
+  <button
+      id="continueBtn"
+      class="primary">
+      Continue
+  </button>
+
+</section>
+
+<!-- EDITOR -->
+<section id="editorScreen" class="screen">
+
+<header class="editorHeader">
+
+<button id="editorBack">
+←
 </button>
 
-<button class="secondary">
-📂 Open Project
+<h3>Editor</h3>
+
+<button>
+💾
 </button>
 
-<button class="secondary">
-🎨 Templates
-</button>
+</header>
 
-<button class="secondary">
-⚙ Settings
-</button>
-
-</div>
-
-</div>
-
-<!-- PROJECT SCREEN -->
-
-<div id="projectScreen" class="screen">
-
-<div class="card">
-
-<h2>New Project</h2>
-
-<p>Select your media.</p>
-
-<label class="upload">
-
-<input
-type="file"
-id="videoInput"
-accept="video/*"
-hidden>
-
-📹 Upload Video
-
-</label>
-
-<label class="upload">
-
-<input
-type="file"
-id="audioInput"
-accept="audio/*"
-hidden>
-
-🎵 Upload Audio
-
-</label>
-
-<button
-id="backBtn"
-class="secondary">
-
-⬅ Back
-
-</button>
-
-</div>
-
-</div>
-
-<!-- PREVIEW SCREEN -->
-
-<div id="previewScreen" class="screen">
-
-<div class="card">
-
-<h2>Video Preview</h2>
+<div class="previewArea">
 
 <video
-id="videoPreview"
-controls
-style="
-width:100%;
-border-radius:18px;
-margin-bottom:20px;
+id="editorVideo"
+controls>
+</video>
+
+<div id="captionOverlay">
+
+Your captions will appear here
+
+</div>
+
+</div>
+
+<div class="timeline">
+
+<div class="progress"></div>
+
+</div>
+
+<textarea
+id="captionText"
+placeholder="Write captions here..."></textarea>
+
+<div class="toolbar">
+
+<button>Aa</button>
+
+<button>🌈</button>
+
+<button>✨</button>
+
+<button>📍</button>
+
+<button>🤖</button>
+
+<button>📤</button>
+
+</div>
+
+</section>
+
+<script src="app.js"></script>
+
+</body>
+</html>
