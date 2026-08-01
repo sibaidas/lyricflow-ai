@@ -9,12 +9,9 @@
 
 <title>LyricFlow AI</title>
 
-
 <link rel="stylesheet" href="style.css">
 
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
 
 </head>
 
@@ -22,9 +19,9 @@
 <body>
 
 
+<!-- HOME SCREEN -->
 
 <section id="homeScreen" class="screen active">
-
 
 <h1>🎵 LyricFlow AI</h1>
 
@@ -32,9 +29,7 @@
 
 
 <button id="newProjectBtn" class="primary">
-
 ➕ New Project
-
 </button>
 
 
@@ -44,6 +39,8 @@
 
 
 
+<!-- UPLOAD SCREEN -->
+
 <section id="uploadScreen" class="screen">
 
 
@@ -52,15 +49,10 @@
 
 <label class="uploadBox">
 
-
-<input
-
+<input 
 id="videoInput"
-
 type="file"
-
 accept="video/*,audio/*"
-
 hidden>
 
 
@@ -86,6 +78,8 @@ hidden>
 
 
 
+<!-- PREVIEW SCREEN -->
+
 <section id="previewScreen" class="screen">
 
 
@@ -94,11 +88,8 @@ hidden>
 
 
 <video
-
 id="videoPreview"
-
 controls>
-
 </video>
 
 
@@ -111,10 +102,9 @@ No media selected
 
 
 
+
 <button
-
 id="continueBtn"
-
 class="primary">
 
 Continue →
@@ -130,6 +120,9 @@ Continue →
 
 
 
+
+
+<!-- EDITOR SCREEN -->
 
 <section id="editorScreen" class="screen">
 
@@ -165,6 +158,7 @@ Continue →
 
 
 
+
 <div class="previewArea">
 
 
@@ -175,7 +169,6 @@ id="editorVideo"
 controls>
 
 </video>
-
 
 
 
@@ -194,12 +187,11 @@ Your captions will appear here
 
 
 
+
 <div class="timeline">
 
 
-<div class="progress">
-
-</div>
+<div class="progress"></div>
 
 
 </div>
@@ -224,54 +216,42 @@ placeholder="Write captions here...">
 
 
 
-
 <div class="toolbar">
 
 
 <button>
-
 Aa
-
 </button>
 
 
 <button>
-
 🌈
-
 </button>
 
 
 <button>
-
 ✨
-
 </button>
 
 
 <button>
-
 📍
-
 </button>
 
 
-<button>
-
+<button id="generateCaptionBtn">
 🤖
-
 </button>
 
 
 <button>
-
 📤
-
 </button>
 
 
 
 </div>
+
 
 
 
@@ -283,7 +263,9 @@ Aa
 
 
 
-<!-- Engines -->
+
+
+<!-- ENGINE FILES -->
 
 <script src="js/editor.js"></script>
 
@@ -293,8 +275,10 @@ Aa
 
 <script src="js/language.js"></script>
 
+<script src="js/captionGenerator.js"></script>
 
-<!-- Main Controller -->
+
+<!-- MAIN APP -->
 
 <script src="app.js"></script>
 
